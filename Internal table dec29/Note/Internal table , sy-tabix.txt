@@ -1,0 +1,82 @@
+Topic :-internal table ,sort , describe table ,read table ,sy-tfill , sy-tabix ,non-unique , descending ,insert ,append
+	
+
+APPEND LINES OF itab1 [FROM idx1] [TO idx2] TO itab2.
+sy-tabix used to store te internal table index [1,2,3.......]
+
+New Syntax for internal table
+data : it_table type table of ty_tabel(Strucutre) with header line
+
+Note:-
+1) loop at it_table .
+end loop.
+2) loop at it_table from 1 to 3
+write from index 1 to 3
+endlooop.
+
+a) loop at it_table into work area.
+   endloop.
+3) loop at it_Table where field-name ='Manager'.
+   write : 'if field name is equal to manger it will print the field .
+   endloop.
+4) Describe table it_Table.
+   Write: sy-tfill ( show the total number of rows in internal table) next to describe table
+5) clear it_table[] (clear the entire internal table, work area, variable)
+	or
+	refresh it_table -->(deallocate memory only for internal table) refer to body
+	(or)
+	free it_Table -->(deallocate memory only for internal table) refer to body
+6) append it_Table.
+7) append line of it_table1 to it_table2(copy enter data from table 1 to table2)
+   	or
+	it_table1 = it_table2
+8) append wa to it_table
+9) Insert workarea into table it_Table
+10) Insert workare into it_table index 2
+-----------------------------------------------------------------------------------------------------
+Standard table
+Standard table doesn't support the unquie key it support non-unquie key
+				   ----------    ----------------------       
+it is not essential to give te unquie key in standard table
+
+data : it_Table type table of ty_Str with non-unquie key empno
+sort it_Table
+--it will sort according to key field if there is no key in standard table it will sort according to
+character --> if there is no character present in field it sort according to nuberic number
+
+11) sort it_Table by empage ---> default it sort in ascending order
+
+12) sort it_table by emp_Age descending 
+
+13) a) Read table it_table into work_area index 5 transporting emp_id emp_phone .
+use of transporting :- it help to retrive only specific field ,eventhough it contain 100 field we can transport 5 fields from that
+
+    b)Read table it_table index 5 transporting no fields.
+NO fields is transport to work Area,it is used for just to check te value present in table or not
+
+
+14) Read table it_Table into work _area index 2
+Note:- read table is used to store te single value 
+it retrive the single data from the internal table
+
+15) Read table it_table into work_area with key name ='vicky' binary search .
+
+16) sy-tabix used to see the iteration in internal table  , sy-index used to see the iteration in while and do loop
+------------------------------------------------------------------------------------------------------------------------
+Sorted table
+17) Sorted internal table supports both unique and non unique key without unique key we cant declare the sort table
+					---------------------
+syntax  : data : it_sort_table type sorted table of ty_str with unique key emp_no .
+	data : it_sort_table type sorted table of ty_str with non-unique key emp_no .
+18) In Sorted table we need to use insert keyboard its is more prefered than append keyboard
+19) We cant use the sort command explicitily like in standard table
+eg:-sort it_table by ename. (Show te error).
+------------------------------------------------------------------------------------------------------------------------
+
+Hashtable
+20) indexing is not used only key is used
+->append ,insert with index , read wit binary search ,read with are not applicable
+21) hashtable allow only the unique key 
+			     ----------
+22) append is not used--> meanwhile we can use (insert work_area into table  it_table )
+23) sorting can done explicitily 
